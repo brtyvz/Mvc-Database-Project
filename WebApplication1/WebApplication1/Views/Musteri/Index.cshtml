@@ -1,0 +1,47 @@
+﻿@using WebApplication1.Models.Entity
+@model List<TBLMUSTERILER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+{
+    <p>
+        Aranacak Musteri Adi:@Html.TextBox("p");
+    </p>
+     
+}
+<table class="table table-bordered">
+    <tr>
+
+        <th>MUSTERI ID</th>
+        <th>MUSTERI AD</th>
+        <th>MUSTERI SOYAD</th>
+        <th>SIL</th>
+        <th>GUNCELLE</th>
+        <th>SIL BUTONU</th>
+
+
+    </tr>
+    <tbody>
+        @foreach (var musteri in Model)
+        {
+        <tr>
+            <td>@musteri.MUSTERIID</td>
+            <td>@musteri.MUSTERIAD</td>
+            <td>@musteri.MUSTERISOYAD</td>
+            <td><a href="/Musteri/SIL/@musteri.MUSTERIID" class="btn btn-danger">SIL</a></td>
+            <td><a href="/Musteri/MusteriGetir/@musteri.MUSTERIID" class="btn btn-success">GUNCELLE</a></td>
+            <td>@Html.ActionLink("SIL BUTONU","SIL",new {id=musteri.MUSTERIID},new {@class="btn btn-warning",onclick="return confirm('gercekten silmek istiyor musunuz')" })</td>
+           
+            @*silmee basinca uyari mesaji vermesi icin 29.satir*@
+
+
+
+
+        </tr>
+        }
+
+    </tbody>
+</table>
+<a href="/Musteri/YeniMusteri"class="btn btn-primary">Yeni Musteri</a>
